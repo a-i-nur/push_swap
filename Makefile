@@ -8,7 +8,7 @@ LIBFT = libft
 LIBFT_A = $(LIBFT)/libft.a
 IFLAGS = -I$(INCLUDES) -I$(LIBFT)
 
-C_FILES = push_swap.c
+C_FILES = main.c
 
 O_FILES = $(addprefix $(OBJECTS)/,$(C_FILES:.c=.o))
 

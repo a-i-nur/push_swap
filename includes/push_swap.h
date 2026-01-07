@@ -3,4 +3,23 @@
 
 # include "libft.h"
 
+typedef struct  s_node
+{
+    int             value;
+    int             index;
+    struct s_node   *next;  
+    struct s_node   *prev;
+} t_node;
+typedef struct  s_stack
+{
+    t_node  *top;
+    t_node  *bottom;
+    char    name;
+    int     size;
+} t_stack;
+t_node  *node_new(int value);
+t_stack stack_new(char name);
+void    push_top(t_stack *stack, t_node *node);
+t_node  *pop_top(t_stack *stack);
+
 #endif

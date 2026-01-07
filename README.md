@@ -15,6 +15,22 @@ Project Tasks
 Evaluation Focus
 ----------------
 - **Stack Usage**: how the A/B stacks are structured and updated.
+Что такое стэк? Нужно описание
+Где боттом, где том, что такое пуш, что такое поп.
 - **Algorithm Design**: the sorting strategy and pivot logic.
 - **Performance**: number of operations produced for various input sizes.
 - **Big-O Analysis**: reasoning about the time complexity of the chosen approach.
+
+Теоретическая информация, полезная для проекта
+2. Инварианты
+Определение. Это условия, которые Ввсегда должны быть истинны для структуры данных
+если size == 0:
+ top == NULL
+ bottom == NULL
+если size == 1:
+ top == bottom
+ top->prev == NULL
+ top->next == NULL
+ top->prev == NULL
+ bottom->next == NULL
+
