@@ -23,5 +23,6 @@ void    stack_push_top(t_stack *stack, t_node *node);
 t_node  *stack_pop_top(t_stack *stack);
 void    stack_rotate(t_stack *stack);
 void    stack_reverse_rotate(t_stack *stack);
+void    stack_swap_top(t_stack *stack);
 
 #endif
