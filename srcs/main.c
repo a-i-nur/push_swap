@@ -2,6 +2,6 @@
 
 int main()
 {
-    ft_printf("%s\n", "hello world");
-    return (0);
+	ft_printf("%s\n", "hello world");
+	return (0);
 }

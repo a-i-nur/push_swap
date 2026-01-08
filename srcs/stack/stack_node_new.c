@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-t_node	*node_new(int value)
+t_node	*stack_node_new(int value)
 {
 	t_node	*new_node;
 
