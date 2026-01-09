@@ -11,6 +11,7 @@ Project Tasks
 4. Implement the main push_swap logic.
 5. Add the bonus features.
 6. Polish this README.
+7. Изуить гайды и тесты
 
 Evaluation Focus
 ----------------
@@ -34,3 +35,4 @@ Evaluation Focus
  top->prev == NULL
  bottom->next == NULL
 
+3. 

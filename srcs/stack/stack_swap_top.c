@@ -15,6 +15,7 @@ void    stack_swap_top(t_stack *stack)
 	new_top->next = old_top;
 	new_top->prev = NULL;
 	stack->top = new_top;
+	third = old_top->next;
 	if (stack->size == 2)
 	{
 		old_top->next = NULL;	
@@ -22,7 +23,6 @@ void    stack_swap_top(t_stack *stack)
 	}
 	else if (stack->size > 2)
 	{
-		third = old_top->next;
 		third->prev = old_top;
 	}
 }

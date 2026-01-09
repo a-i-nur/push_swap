@@ -1,7 +1,5 @@
 #include "push_swap.h"
 
-// Тот, кого кладут в стек, становится top,
-// а старый top становится next нового узла.
 void	stack_push_top(t_stack *stack, t_node *node)
 {
 	t_node  *old_top;
