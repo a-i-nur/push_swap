@@ -31,6 +31,7 @@ void    stack_push_top(t_stack *stack, t_node *node);
 void    stack_rotate(t_stack *stack);
 void    stack_reverse_rotate(t_stack *stack);
 void    stack_swap_top(t_stack *stack);
+void	stack_push_bottom(t_stack *stack, t_node *node);
 void    op_sa(t_state *state);
 void    op_sb(t_state *state);
 void    op_ss(t_state *state);
@@ -45,5 +46,8 @@ void	op_rrr(t_state *state);
 void 	op_print(t_state *state, const char *op);
 void	error_exit(t_state *state);
 void	free_state(t_state *state);
+void	parse_args(t_state *state, int argc, char **argv);
+int		is_valid_number(const char *num);
+long	ft_atol(const char *num, int *num_int_flag);
 
 #endif

@@ -1,7 +1,7 @@
 #include "push_swap.h"
 
-int main()
+int main(int argc, char *argv[])
 {
-	ft_printf("%s\n", "hello world");
+	ft_printf("%d %s\n", argc, argv[0], argv[1]);
 	return (0);
 }
