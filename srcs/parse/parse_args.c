@@ -47,14 +47,19 @@ static void	parse_and_push_numbers(t_state *state, char **numbers)
 	int		j;
 	t_node	*node;
 	int		num_int_flag;
+	int		all_zero_flag;
 
 	j = 0;
 	while(numbers[j])
 	{
 		num_int_flag = 1;
-		if (is_valid_number(numbers[j]) == 0)
+		all_zero_flag = 0;
+		if (is_valid_number(numbers[j], &all_zero_flag) == 0)
 			parse_error(numbers, state);
-		number = ft_atol(numbers[j], &num_int_flag);
+		if (all_zero_flag == 1)
+			number = 0;
+		else
+			number = ft_atol(numbers[j], &num_int_flag);
 		if (num_int_flag == 0)
 			parse_error(numbers, state);
 		node = stack_node_new((int)number);

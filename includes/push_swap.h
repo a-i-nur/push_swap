@@ -47,7 +47,10 @@ void 	op_print(t_state *state, const char *op);
 void	error_exit(t_state *state);
 void	free_state(t_state *state);
 void	parse_args(t_state *state, int argc, char **argv);
-int		is_valid_number(const char *num);
+int		is_valid_number(const char *num, int *all_zero_flag);
 long	ft_atol(const char *num, int *num_int_flag);
+int		assign_indexes(t_stack *a);
+int		ft_merge_sort_ints(int *arr, int left, int right);
+int		find_index(const int *arr, int size, int value);
 
 #endif
