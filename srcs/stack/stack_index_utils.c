@@ -78,3 +78,22 @@ int find_index(const int *arr, int size, int value)
 	}
 	return (left);
 }
+
+int	is_sorted_stack(const t_stack *a)
+{
+	t_node	*node;
+
+	if (!a)
+		return (1);
+	if (a->size <= 1)
+		return (1);
+	
+	node = a->top;
+	while(node->next != NULL)
+	{
+		if (node->value > node->next->value)
+			return (0);
+		node = node->next;
+	}
+	return (1);
+}

@@ -52,5 +52,6 @@ long	ft_atol(const char *num, int *num_int_flag);
 int		assign_indexes(t_stack *a);
 int		ft_merge_sort_ints(int *arr, int left, int right);
 int		find_index(const int *arr, int size, int value);
+int		is_sorted_stack(const t_stack *a);
 
 #endif
