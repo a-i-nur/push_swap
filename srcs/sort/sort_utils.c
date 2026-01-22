@@ -1,5 +1,10 @@
 #include "push_swap.h"
 
+/**
+ * @brief Найти позицию минимального индекса в стеке.
+ * @param stack Стек для поиска.
+ * @return Позиция (0 = верх) или -1 при пустом/NULL.
+ */
 int	find_min_pos(const t_stack *stack)
 {
 	int	pos;
@@ -26,6 +31,11 @@ int	find_min_pos(const t_stack *stack)
 	return min_pos;
 }
 
+/**
+ * @brief Найти позицию максимального индекса в стеке.
+ * @param stack Стек для поиска.
+ * @return Позиция (0 = верх) или -1 при пустом/NULL.
+ */
 int find_max_pos(const t_stack *stack)
 {
     int pos;
@@ -52,6 +62,12 @@ int find_max_pos(const t_stack *stack)
     return max_pos;
 }
 
+/**
+ * @brief Прокрутить стек так, чтобы элемент по позиции стал сверху.
+ * @param state Состояние.
+ * @param pos Позиция (0 = верх).
+ * @param stack_name 'a' или 'b'.
+ */
 void	bring_pos_to_top(t_state *state, int pos, char stack_name)
 {
 	int	size; 
@@ -83,167 +99,234 @@ void	bring_pos_to_top(t_state *state, int pos, char stack_name)
 	}
 } 
 
-int find_pos_in_chunk(const t_stack *stack, int low, int high)
+/**
+ * @brief Посчитать LIS-флаги и медиану non-LIS.
+ * @param a Стек A.
+ * @param size Размер.
+ * @param pivot_out Выходной pivot (медиана non-LIS).
+ * @return Массив flags (1 = в LIS) или NULL.
+ */
+static int	*compute_lis_flags_and_pivot(const t_stack *a, int size, int *pivot_out)
 {
-    int pos;
-    t_node *node;
-
-	pos = 0;
-    node = stack->top;
-    while (node)
-    {
-        if (node->index >= low && node->index <= high)
-            return (pos);
-        pos++;
-        node = node->next;
-    }
-    return (-1);
-}
-
-int	find_nearest_pos_in_range(const t_stack *stack, int low, int high)
-{
-	int		pos_front;
-	int		pos_back;
+	int		*arr;
+	int		*len;
+	int		*prev;
+	int		*flags;
+	int		*non;
+	int		i;
+	int		j;
+	int		best_len;
+	int		best_idx;
+	int		count;
 	t_node	*node;
 
-	if (!stack || stack->size == 0 || !stack->top)
-		return (-1);
-	pos_front = 0;
+	arr = (int *)malloc(sizeof(int) * size);
+	len = (int *)malloc(sizeof(int) * size);
+	prev = (int *)malloc(sizeof(int) * size);
+	flags = (int *)malloc(sizeof(int) * size);
+	if (!arr || !len || !prev || !flags)
+	{
+		free(arr);
+		free(len);
+		free(prev);
+		free(flags);
+		return (NULL);
+	}
+	i = 0;
+	while (i < size)
+	{
+		arr[i] = 0;
+		len[i] = 1;
+		prev[i] = -1;
+		flags[i] = 0;
+		i++;
+	}
+	i = 0;
+	node = a->top;
+	while (i < size)
+	{
+		arr[i] = node->index;
+		node = node->next;
+		i++;
+	}
+	i = 0;
+	while (i < size)
+	{
+		j = 0;
+		while (j < i)
+		{
+			if (arr[j] < arr[i] && len[j] + 1 > len[i])
+			{
+				len[i] = len[j] + 1;
+				prev[i] = j;
+			}
+			j++;
+		}
+		i++;
+	}
+	best_len = 0;
+	best_idx = 0;
+	i = 0;
+	while (i < size)
+	{
+		if (len[i] > best_len)
+		{
+			best_len = len[i];
+			best_idx = i;
+		}
+		i++;
+	}
+	while (best_idx != -1)
+	{
+		flags[arr[best_idx]] = 1;
+		best_idx = prev[best_idx];
+	}
+	count = 0;
+	i = 0;
+	while (i < size)
+	{
+		if (flags[i] == 0)
+			count++;
+		i++;
+	}
+	if (count == 0)
+	{
+		*pivot_out = -1;
+		free(arr);
+		free(len);
+		free(prev);
+		return (flags);
+	}
+	non = (int *)malloc(sizeof(int) * count);
+	if (!non)
+	{
+		free(arr);
+		free(len);
+		free(prev);
+		free(flags);
+		return (NULL);
+	}
+	i = 0;
+	j = 0;
+	while (i < size)
+	{
+		if (flags[i] == 0)
+		{
+			non[j] = i;
+			j++;
+		}
+		i++;
+	}
+	ft_merge_sort_ints(non, 0, count);
+	*pivot_out = non[count / 2];
+	free(non);
+	free(arr);
+	free(len);
+	free(prev);
+	return (flags);
+}
+
+/**
+ * @brief Найти позицию элемента по индексу в стеке.
+ * @param stack Стек.
+ * @param idx Искомый индекс.
+ * @return Позиция (0 = верх), 0 если не найден.
+ */
+static int	find_pos_by_index(const t_stack *stack, int idx)
+{
+	int		pos;
+	t_node	*node;
+
+	pos = 0;
 	node = stack->top;
 	while (node)
 	{
-		if (node->index >= low && node->index <= high)
-			break ;
-		pos_front++;
-		node = node->next;
-	}
-	if (!node)
-		return (-1);
-	pos_back = 0;
-	node = stack->bottom;
-	while (node)
-	{
-		if (node->index >= low && node->index <= high)
-			break ;
-		pos_back++;
-		node = node->prev;
-	}
-	if (pos_front <= pos_back)
-		return (pos_front);
-	return (stack->size - pos_back);
-}
-
-int find_insert_pos_in_a(const t_stack *a, int x)
-{
-	int		pos;
-	int		min_pos;
-	int		min_index;
-	int		max_index;
-	t_node	*node;
-
-	if (!a || a->size == 0 || !a->top)
-		return (0);
-	pos = 0;
-	min_pos = 0;
-	min_index = INT_MAX;
-	max_index = INT_MIN;
-	node = a->top;
-	while (node)
-	{
-		if (node->index < min_index)
-		{
-			min_index = node->index;
-			min_pos = pos;
-		}
-		if (node->index > max_index)
-			max_index = node->index;
-		pos++;
-		node = node->next;
-	}
-	if (x < min_index || x > max_index)
-		return (min_pos);
-	pos = 0;
-	node = a->top;
-	while (node && node->next)
-	{
-		if (node->index < x && node->next->index > x)
-			return (pos + 1);
+		if (node->index == idx)
+			return (pos);
 		pos++;
 		node = node->next;
 	}
 	return (0);
 }
 
-static int	find_nearest_below_pos(const t_stack *stack, int limit)
+/**
+ * @brief Найти целевой индекс в A для вставки x.
+ *
+ * Ищем минимальный индекс больше x. Если такого нет, берём минимальный индекс.
+ *
+ * @param a Стек A.
+ * @param x Индекс из B.
+ * @return Целевой индекс в A.
+ */
+static int	find_target_index_in_a(const t_stack *a, int x)
 {
-	int		pos;
-	int		pos_front;
-	int		pos_back;
+	int		min_index;
+	int		target;
 	t_node	*node;
 
-	if (!stack || stack->size == 0 || !stack->top)
-		return (-1);
-	pos_front = 0;
-	node = stack->top;
+	min_index = INT_MAX;
+	target = INT_MAX;
+	node = a->top;
 	while (node)
 	{
-		if (node->index < limit)
-			break ;
-		pos_front++;
+		if (node->index < min_index)
+			min_index = node->index;
+		if (node->index > x && node->index < target)
+			target = node->index;
 		node = node->next;
 	}
-	if (!node)
-		return (-1);
-	pos_back = 0;
-	node = stack->bottom;
-	while (node)
-	{
-		if (node->index < limit)
-			break ;
-		pos_back++;
-		node = node->prev;
-	}
-	if (pos_front <= pos_back)
-		return (pos_front);
-	pos = stack->size - pos_back;
-	return (pos);
+	if (target != INT_MAX)
+		return (target);
+	return (min_index);
 }
 
-int choose_chunk_count(int n)
-{
-	if (n <= 100)
-		return (8);
-	if (n <= 500)
-		return (16);
-	return (20);
-}
-
+/**
+ * @brief Переносить в B все элементы, не входящие в LIS.
+ *
+ * Алгоритм:
+ * 1) Находим LIS по индексам (0..n-1) в порядке стека A.
+ * 2) Все элементы, не входящие в LIS, отправляем в B.
+ * 3) Дополнительно предсортируем B по медиане non-LIS:
+ *    большие индексы уводим вниз через rb.
+ */
 void push_chunks_a_to_b(t_state *state)
 {
 	int		size;
-	int		limit;
-	int		pos;
+	int		i;
+	int		*flags;
+	int		pivot;
 
 	size = state->a.size;
-	while (state->a.size > 3)
+	if (size <= 3)
+		return;
+	pivot = -1;
+	flags = compute_lis_flags_and_pivot(&state->a, size, &pivot);
+	if (!flags)
+		return;
+	i = 0;
+	while (i < size)
 	{
-		limit = size - (state->a.size * 4) / 5;
-		if (limit > size - 3)
-			limit = size - 3;
-		if (state->a.top->index < limit)
-			op_pb(state);
+		if (flags[state->a.top->index] == 1)
+		{
+			op_ra(state);
+		}
 		else
 		{
-			pos = find_nearest_below_pos(&state->a, limit);
-			if (pos < 0)
-				break ;
-			bring_pos_to_top(state, pos, 'a');
-			if (state->a.top->index < limit)
-				op_pb(state);
+			op_pb(state);
+			if (pivot >= 0 && state->b.top->index > pivot)
+				op_rb(state);
 		}
+		i++;
 	}
+	free(flags);
 }
 
+/**
+ * @brief Посчитать вращения до верха (со знаком).
+ * @param size Размер стека.
+ * @param pos Позиция элемента.
+ * @return + для ra/rb, - для rra/rrb.
+ */
 int rotations_to_top(int size, int pos)
 {
 	int	rot;
@@ -256,6 +339,9 @@ int rotations_to_top(int size, int pos)
 	return (rot);
 }
 
+/**
+ * @brief Абсолютное значение int.
+ */
 int	abs_i(int x)
 {
 	int	res;
@@ -266,6 +352,12 @@ int	abs_i(int x)
 	return (res);
 }
 
+/**
+ * @brief Общая стоимость вращений с учетом rr/rrr.
+ * @param rot_a Вращения A.
+ * @param rot_b Вращения B.
+ * @return Количество операций.
+ */
 int total_cost(int rot_a, int rot_b)
 {
 	int	abs_a;
@@ -286,6 +378,11 @@ int total_cost(int rot_a, int rot_b)
 	return (sum);
 }
 
+/**
+ * @brief Выбрать элемент из B с минимальной ценой вставки в A.
+ * @param st Состояние.
+ * @return Структура t_move с лучшим вариантом.
+ */
 t_move pick_best_move_from_b(t_state *st)
 {
 	t_move	best;
@@ -304,8 +401,8 @@ t_move pick_best_move_from_b(t_state *st)
 	{
 		x = node->index;
 
-		target_pos_a = find_insert_pos_in_a(&st->a, x);
-
+		target_pos_a = find_pos_by_index(&st->a,
+				find_target_index_in_a(&st->a, x));
 		rot_a = rotations_to_top(st->a.size, target_pos_a);
 		rot_b = rotations_to_top(st->b.size, pos_b);
 
@@ -324,6 +421,12 @@ t_move pick_best_move_from_b(t_state *st)
 	return (best);
 }
 
+/**
+ * @brief Применить совместные и одиночные вращения A/B.
+ * @param st Состояние.
+ * @param rot_a Вращения A.
+ * @param rot_b Вращения B.
+ */
 void apply_dual_rotations(t_state *st, int rot_a, int rot_b)
 {
 	while (rot_a > 0 && rot_b > 0)
@@ -360,6 +463,10 @@ void apply_dual_rotations(t_state *st, int rot_a, int rot_b)
 	}
 }
 
+/**
+ * @brief Жадно вернуть элементы из B в A по минимальной цене.
+ * @param st Состояние.
+ */
 void push_back_b_to_a_greedy(t_state *st)
 {
 	t_move	mv;
@@ -372,6 +479,10 @@ void push_back_b_to_a_greedy(t_state *st)
 	}
 }
 
+/**
+ * @brief Довернуть A так, чтобы минимальный индекс был сверху.
+ * @param st Состояние.
+ */
 void final_rotate_min_to_top(t_state *st)
 {
 	int	pos_min;
