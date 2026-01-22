@@ -7,25 +7,32 @@
 
 typedef struct  s_node
 {
-	int             value;
-	int             index;
-	struct s_node   *next;  
-	struct s_node   *prev;
+	int				value;
+	int				index;
+	struct s_node	*next;  
+	struct s_node	*prev;
 } t_node;
 typedef struct  s_stack
 {
-	t_node  *top;
-	t_node  *bottom;
-	char    name;
-	int     size;
+	t_node	*top;
+	t_node	*bottom;
+	char	name;
+	int		size;
 } t_stack;
 typedef struct  s_state
 {
-	t_stack a;
-	t_stack b;
-	int     print;
+	t_stack	a;
+	t_stack	b;
+	int		print;
 	long	ops_count;
 } t_state;
+typedef struct s_move
+{
+	int	pos_b;
+	int	rot_a;
+	int	rot_b;
+	int	cost;
+} t_move;
 t_node  *stack_node_new(int value);
 t_stack stack_new(char name);
 t_node  *stack_pop_top(t_stack *stack);
@@ -60,11 +67,23 @@ void	sort_dispatch(t_state *state);
 void	sort_small(t_state *state);
 void	sort_small_2(t_state *state);
 void	sort_small_3(t_state *state);
-int		find_min_pos(const t_stack *a);
-void	bring_pos_to_top_a(t_state *state, int pos);
 void	sort_small_4(t_state *state);
 void	sort_small_5(t_state *state);
 void	sort_big(t_state *state);
-
+int		find_min_pos(const t_stack *stack);
+int		find_max_pos(const t_stack *stack);
+void	bring_pos_to_top(t_state *state, int pos, char stack_name);
+int		find_pos_in_chunk(const t_stack *stack, int low, int high);
+int		find_nearest_pos_in_range(const t_stack *stack, int low, int high);
+int		find_insert_pos_in_a(const t_stack *a, int x);
+int		choose_chunk_count(int n);
+void	push_chunks_a_to_b(t_state *state);
+int		rotations_to_top(int size, int pos);
+int		abs_i(int x);
+int		total_cost(int rot_a, int rot_b);
+t_move	pick_best_move_from_b(t_state *st);
+void	apply_dual_rotations(t_state *st, int rot_a, int rot_b);
+void	push_back_b_to_a_greedy(t_state *st);
+void	final_rotate_min_to_top(t_state *st);
 
 #endif

@@ -9,7 +9,7 @@ void sort_small_5(t_state *state)
 	while (i < 2)
 	{
 		pos = find_min_pos(&state->a);
-		bring_pos_to_top_a(state, pos);
+		bring_pos_to_top(state, pos, 'a');
 		op_pb(state);
 		i++;
 	}
