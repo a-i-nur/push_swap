@@ -15,8 +15,10 @@ void	ft_stack_clear(t_node **node)
 	*node = NULL;
 }
 
-void	free_state(t_state *state)
+void	state_free(t_state *state)
 {
+	if (!state)
+		return ;
     ft_stack_clear(&state->a.top);
     ft_stack_clear(&state->b.top);
     state->a.top = NULL;

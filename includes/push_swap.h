@@ -3,6 +3,8 @@
 
 # include "libft.h"
 
+# define SMALL_SORT_MAX 5
+
 typedef struct  s_node
 {
 	int             value;
@@ -32,6 +34,8 @@ void    stack_rotate(t_stack *stack);
 void    stack_reverse_rotate(t_stack *stack);
 void    stack_swap_top(t_stack *stack);
 void	stack_push_bottom(t_stack *stack, t_node *node);
+t_state	state_new();
+void	state_free(t_state *state);
 void    op_sa(t_state *state);
 void    op_sb(t_state *state);
 void    op_ss(t_state *state);
@@ -45,7 +49,6 @@ void	op_rrb(t_state *state);
 void	op_rrr(t_state *state);
 void 	op_print(t_state *state, const char *op);
 void	error_exit(t_state *state);
-void	free_state(t_state *state);
 void	parse_args(t_state *state, int argc, char **argv);
 int		is_valid_number(const char *num, int *all_zero_flag);
 long	ft_atol(const char *num, int *num_int_flag);
@@ -53,5 +56,15 @@ int		assign_indexes(t_stack *a);
 int		ft_merge_sort_ints(int *arr, int left, int right);
 int		find_index(const int *arr, int size, int value);
 int		is_sorted_stack(const t_stack *a);
+void	sort_dispatch(t_state *state);
+void	sort_small(t_state *state);
+void	sort_small_2(t_state *state);
+void	sort_small_3(t_state *state);
+int		find_min_pos(const t_stack *a);
+void	bring_pos_to_top_a(t_state *state, int pos);
+void	sort_small_4(t_state *state);
+void	sort_small_5(t_state *state);
+void	sort_big(t_state *state);
+
 
 #endif

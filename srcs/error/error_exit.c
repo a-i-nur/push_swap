@@ -3,6 +3,6 @@
 void	error_exit(t_state *state)
 {
 	write(2, "Error\n", 6);
-	free_state(state);
+	state_free(state);
 	exit(1);
 }

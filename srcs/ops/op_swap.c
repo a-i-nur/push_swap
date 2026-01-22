@@ -1,27 +1,27 @@
 #include "push_swap.h"
 
-void    op_sa(t_state *state)
+void	op_sa(t_state *state)
 {
 	if (!state || state->a.size < 2)
-        return ;
+		return ;
 	stack_swap_top(&state->a);
 	op_print(state, "sa");
 }
 
-void    op_sb(t_state *state)
+void	op_sb(t_state *state)
 {
 	if (!state || state->b.size < 2)
-        return ;
+		return ;
 	stack_swap_top(&state->b);
 	op_print(state, "sb");
 }
 
-void    op_ss(t_state *state)
+void	op_ss(t_state *state)
 {
-	int save_print;
+	int	save_print;
 
     if (!state)
-        return ;
+		return ;
 	save_print = state->print;
 	state->print = 0;
 	op_sa(state);

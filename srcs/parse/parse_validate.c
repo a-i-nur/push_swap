@@ -8,7 +8,7 @@ static int	check_digit(char num, int *count)
 		(*count)++;
 	else if (*count > 0)
 		(*count)++;
-	return (1)
+	return (1);
 }
 
 int	is_valid_number(const char *num, int *all_zero_flag)
@@ -17,7 +17,7 @@ int	is_valid_number(const char *num, int *all_zero_flag)
 	int	sign;
 	int count;
 
-	if (!num || !num[0])
+	if (!num || !num[0] || !all_zero_flag)
 		return (0);
 	sign = 0;
 	count = 0;
