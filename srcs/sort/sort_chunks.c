@@ -38,7 +38,7 @@ t_lis lis_new(const t_stack *a, int size)
 	lis.node = a->top;
 	lis.best_len = 0;
 	lis.best_index = 0;
-	list.count_non = 0;
+	lis.count_non = 0;
 	return (lis);
 }
 
