@@ -67,19 +67,25 @@ void	sort_dispatch(t_state *state);
 void	sort_small(t_state *state);
 void	sort_small_2(t_state *state);
 void	sort_small_3(t_state *state);
-void	sort_small_4(t_state *state);
-void	sort_small_5(t_state *state);
-void	sort_big(t_state *state);
 int		find_min_pos(const t_stack *stack);
 int		find_max_pos(const t_stack *stack);
 void	bring_pos_to_top(t_state *state, int pos, char stack_name);
+void	sort_small_4(t_state *state);
+void	sort_small_5(t_state *state);
+
 void	push_chunks_a_to_b(t_state *state);
+
+
+void	sort_big(t_state *state);
+
 int		rotations_to_top(int size, int pos);
+
 int		abs_i(int x);
 int		total_cost(int rot_a, int rot_b);
-t_move	pick_best_move_from_b(t_state *st);
-void	apply_dual_rotations(t_state *st, int rot_a, int rot_b);
-void	push_back_b_to_a_greedy(t_state *st);
-void	final_rotate_min_to_top(t_state *st);
+
+t_move	pick_best_move_from_b(t_state *state);
+void	apply_dual_rotations(t_state *state, int rot_a, int rot_b);
+void	push_back_b_to_a_greedy(t_state *state);
+void	final_rotate_min_to_top(t_state *state);
 
 #endif
