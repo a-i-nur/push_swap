@@ -46,19 +46,12 @@
  * 3) Вернуть элементы из B в A жадно по минимальной цене.
  * 4) Довернуть A так, чтобы минимум был сверху.
  *
- * @param st Состояние.
+ * @param state Состояние.
  */
-void sort_big(t_state *st)
+void sort_big(t_state *state)
 {
-	if (is_sorted_stack(&st->a))
-		return;
-	if (st->a.size <= 5)
-	{
-		sort_small(st);
-		return;
-	}
-	push_chunks_a_to_b(st);
-	sort_small_3(st);
-	push_back_b_to_a_greedy(st);
-	final_rotate_min_to_top(st);
+	push_chunks_a_to_b(state);
+	sort_small_3(state);
+	push_back_b_to_a_greedy(state);
+	final_rotate_min_to_top(state);
 }
