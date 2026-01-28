@@ -26,7 +26,7 @@ static void	fill_non_lis_i(t_lis *lis, int size, int *non_lis)
 	}
 }
 
-static void	fill_list_fap(t_lis *lis, int size)
+static void	fill_lis_best(t_lis *lis, int size)
 {
 	int		i;
 
@@ -54,7 +54,7 @@ static void	fill_list_fap(t_lis *lis, int size)
 	}
 }
 
-static void	fill_lis_apl(t_lis *lis, int size)
+static void	fill_lis_len(t_lis *lis, int size)
 {
 	int		i;
 	int		j;
@@ -83,7 +83,7 @@ static void	fill_lis_apl(t_lis *lis, int size)
 	}
 }
 
-int	*compute_lis_fap(const t_stack *a, int size, int *pivot_out)
+int	*compute_lis_flags(const t_stack *a, int size, int *pivot_out)
 {
 	t_lis	lis;
 	int		*non_lis;
@@ -91,8 +91,8 @@ int	*compute_lis_fap(const t_stack *a, int size, int *pivot_out)
 	lis = lis_new(a, size);
 	if (!lis.arr_index)
 		return (NULL);
-	fill_lis_apl(&lis, size);
-	fill_list_fap(&lis, size);
+	fill_lis_len(&lis, size);
+	fill_lis_best(&lis, size);
 	if (lis.count_non == 0)
 	{
 		*pivot_out = -1;

@@ -11,27 +11,6 @@ VIS_DIR = push_swap_visualizer
 VIS_BUILD = $(VIS_DIR)/build
 
 PS_COMMON_SRCS = srcs/error/error_exit.c \
-	srcs/parse/parse_args.c \
-	srcs/parse/parse_utils.c \
-	srcs/parse/parse_validate.c \
-	srcs/ops/op_print.c \
-	srcs/ops/op_push.c \
-	srcs/ops/op_rev_rotate.c \
-	srcs/ops/op_rotate.c \
-	srcs/ops/op_swap.c \
-	srcs/sort/sort_big.c \
-	srcs/sort/sort_dispatch.c \
-	srcs/sort/sort_small.c \
-	srcs/sort/sort_small_2.c \
-	srcs/sort/sort_small_3.c \
-	srcs/sort/sort_small_4.c \
-	srcs/sort/sort_small_5.c \
-	srcs/sort/sort_compute_lis.c \
-	srcs/sort/sort_greedy.c \
-	srcs/sort/sort_greedy_utils.c \
-	srcs/sort/sort_lis.c \
-	srcs/sort/sort_push_chunks.c \
-	srcs/sort/sort_utils.c \
 	srcs/stack/stack_index.c \
 	srcs/stack/stack_index_utils.c \
 	srcs/stack/stack_new.c \
@@ -43,8 +22,25 @@ PS_COMMON_SRCS = srcs/error/error_exit.c \
 	srcs/stack/stack_rotate.c \
 	srcs/stack/stack_swap_top.c \
 	srcs/state/state_free.c \
-	srcs/state/state_new.c
-
+	srcs/state/state_new.c \
+	srcs/ops/op_print.c \
+	srcs/ops/op_push.c \
+	srcs/ops/op_rev_rotate.c \
+	srcs/ops/op_rotate.c \
+	srcs/ops/op_swap.c \
+	srcs/parse/parse_args.c \
+	srcs/parse/parse_utils.c \
+	srcs/parse/parse_validate.c \
+	srcs/sort/sort_dispatch.c \
+	srcs/sort/sort_small.c \
+	srcs/sort/sort_big.c \
+	srcs/sort/sort_utils.c \
+	srcs/sort/push_chunks.c \
+	srcs/sort/greedy_push_back.c \
+	srcs/sort/greedy_cost.c \
+	srcs/sort/lis_init.c \
+	srcs/sort/lis_compute.c
+	
 PS_SRCS = srcs/main.c $(PS_COMMON_SRCS)
 
 BONUS_SRCS = bonus/checker.c $(PS_COMMON_SRCS)
@@ -88,10 +84,10 @@ fclean: clean
 re: fclean all
 
 test: 
-	@bash test/run_tests.sh
+	@bash tests/run_tests.sh
 
 testleaks:
-	@bash test/run_leaks.sh
+	@bash tests/run_leaks.sh
 
 visualizer: $(VIS_BUILD)/bin/visualizer
 	@cd $(VIS_BUILD) && ./bin/visualizer

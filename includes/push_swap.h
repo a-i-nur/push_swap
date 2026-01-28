@@ -90,7 +90,7 @@ void	sort_small_4(t_state *state);
 void	sort_small_5(t_state *state);
 void	lis_free(t_lis *lis, int with_flags);
 t_lis	lis_new(const t_stack *a, int size);
-int		*compute_lis_fap(const t_stack *a, int size, int *pivot_out);
+int		*compute_lis_flags(const t_stack *a, int size, int *pivot_out);
 void	push_chunks_a_to_b(t_state *state);
 int		total_cost(int rot_a, int rot_b);
 int		rotations_to_top(int size, int pos);

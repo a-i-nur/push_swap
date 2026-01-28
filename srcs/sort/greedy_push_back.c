@@ -76,7 +76,7 @@ static void	fill_best_move(t_state *state, t_move *best,
  * @param state Состояние.
  * @return Структура t_move с лучшим вариантом.
  */
-static t_move	pick_best_move_from_b(t_state *state)
+static t_move	select_best_move_from_b(t_state *state)
 {
 	t_move	best;
 	t_node	*node;
@@ -104,7 +104,7 @@ void	push_back_b_to_a_greedy(t_state *state)
 
 	while (state->b.size > 0)
 	{
-		move = pick_best_move_from_b(state);
+		move = select_best_move_from_b(state);
 		apply_dual_rotations(state, move.rot_a, move.rot_b);
 		op_pa(state);
 	}

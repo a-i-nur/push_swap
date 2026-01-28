@@ -110,12 +110,12 @@ void	bring_pos_to_top(t_state *state, int pos, char stack_name)
 
 /**
  * @brief Довернуть A так, чтобы минимальный индекс был сверху.
- * @param st Состояние.
+ * @param state Состояние.
  */
-void	final_rotate_min_to_top(t_state *st)
+void	final_rotate_min_to_top(t_state *state)
 {
 	int	pos_min;
 
-	pos_min = find_min_pos(&st->a);
-	bring_pos_to_top(st, pos_min, 'a');
+	pos_min = find_min_pos(&state->a);
+	bring_pos_to_top(state, pos_min, 'a');
 }

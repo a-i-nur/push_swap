@@ -20,7 +20,7 @@ void	push_chunks_a_to_b(t_state *state)
 	if (size <= 3)
 		return ;
 	pivot = -1;
-	flags = compute_lis_fap(&state->a, size, &pivot);
+	flags = compute_lis_flags(&state->a, size, &pivot);
 	if (!flags)
 		error_exit(state);
 	i = 0;
