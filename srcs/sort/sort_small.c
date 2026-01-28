@@ -1,8 +1,8 @@
 #include "push_swap.h"
 
-void sort_small(t_state *state)
+void	sort_small(t_state *state)
 {
-	int size;
+	int	size;
 
 	size = state->a.size;
 	if (size <= 1)
@@ -16,4 +16,3 @@ void sort_small(t_state *state)
 	else if (size == 5)
 		sort_small_5(state);
 }
-

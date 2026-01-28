@@ -2,7 +2,7 @@
 
 void	op_pa(t_state *state)
 {
-	t_node *top_node_b;
+	t_node	*top_node_b;
 
 	if (!state || state->b.size == 0)
 		return ;
@@ -13,7 +13,7 @@ void	op_pa(t_state *state)
 
 void	op_pb(t_state *state)
 {
-	t_node *top_node_a;
+	t_node	*top_node_a;
 
 	if (!state || state->a.size == 0)
 		return ;

@@ -1,8 +1,8 @@
 #include "push_swap.h"
 
-static void	copy_values(int *arr_values, t_node *node) 
+static void	copy_values(int *arr_values, t_node *node)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (node != NULL)

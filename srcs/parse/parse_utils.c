@@ -1,11 +1,11 @@
 #include "push_swap.h"
 
-long ft_atol(const char *num, int *num_int_flag)
+long	ft_atol(const char *num, int *num_int_flag)
 {
 	int		i;
 	int		sign;
 	long	res;
-	
+
 	if (!num || !num_int_flag)
 		return (0);
 	*num_int_flag = 1;

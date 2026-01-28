@@ -7,6 +7,8 @@ OBJECTS = object_files
 LIBFT = libft
 LIBFT_A = $(LIBFT)/libft.a
 IFLAGS = -I$(INCLUDES) -I$(LIBFT)
+VIS_DIR = push_swap_visualizer
+VIS_BUILD = $(VIS_DIR)/build
 
 PS_COMMON_SRCS = srcs/error/error_exit.c \
 	srcs/parse/parse_args.c \
@@ -24,6 +26,11 @@ PS_COMMON_SRCS = srcs/error/error_exit.c \
 	srcs/sort/sort_small_3.c \
 	srcs/sort/sort_small_4.c \
 	srcs/sort/sort_small_5.c \
+	srcs/sort/sort_compute_lis.c \
+	srcs/sort/sort_greedy.c \
+	srcs/sort/sort_greedy_utils.c \
+	srcs/sort/sort_lis.c \
+	srcs/sort/sort_push_chunks.c \
 	srcs/sort/sort_utils.c \
 	srcs/stack/stack_index.c \
 	srcs/stack/stack_index_utils.c \
@@ -81,12 +88,20 @@ fclean: clean
 re: fclean all
 
 test: 
-	@./push_swap
+	@bash test/run_tests.sh
 
 testleaks:
-	@valgrind --leak-check=full --show-leak-kinds=all ./push_swap
+	@bash test/run_leaks.sh
+
+visualizer: $(VIS_BUILD)/bin/visualizer
+	@cd $(VIS_BUILD) && ./bin/visualizer
+
+$(VIS_BUILD)/bin/visualizer:
+	@mkdir -p $(VIS_BUILD)
+	@cmake -S $(VIS_DIR) -B $(VIS_BUILD)
+	@$(MAKE) -C $(VIS_BUILD)
 
 norm:
 	@norminette
 
-.PHONY: all bonus clean fclean re
+.PHONY: all bonus clean fclean re test visualizer

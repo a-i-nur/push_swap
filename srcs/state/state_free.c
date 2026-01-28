@@ -19,13 +19,13 @@ void	state_free(t_state *state)
 {
 	if (!state)
 		return ;
-    ft_stack_clear(&state->a.top);
-    ft_stack_clear(&state->b.top);
-    state->a.top = NULL;
-    state->a.bottom = NULL;
-    state->a.size = 0;
-    state->b.top = NULL;
-    state->b.bottom = NULL;
-    state->b.size = 0;
-    state->ops_count = 0;
+	ft_stack_clear(&state->a.top);
+	ft_stack_clear(&state->b.top);
+	state->a.top = NULL;
+	state->a.bottom = NULL;
+	state->a.size = 0;
+	state->b.top = NULL;
+	state->b.bottom = NULL;
+	state->b.size = 0;
+	state->ops_count = 0;
 }

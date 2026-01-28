@@ -1,8 +1,8 @@
 #include "push_swap.h"
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	t_state state;
+	t_state	state;
 
 	// ft_printf("printf: %d %s\n", argc, argv[0]);
 	state = state_new();

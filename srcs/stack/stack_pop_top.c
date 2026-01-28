@@ -1,12 +1,12 @@
 #include "push_swap.h"
 
-t_node  *stack_pop_top(t_stack *stack)
+t_node	*stack_pop_top(t_stack *stack)
 {
-	t_node *back_node;
-	t_node *new_top;
+	t_node	*back_node;
+	t_node	*new_top;
 
 	if (!stack || stack->size == 0)
-		return NULL;
+		return (NULL);
 	back_node = stack->top;
 	if (stack->size == 1)
 	{

@@ -6,7 +6,7 @@ static int	check_duplicates(t_stack *a)
 	t_node	*inner;
 
 	if (!a || !a->top)
-    	return (1);
+		return (1);
 	outer = a->top;
 	while (outer)
 	{
@@ -50,7 +50,7 @@ static void	parse_and_push_numbers(t_state *state, char **numbers)
 	int		all_zero_flag;
 
 	j = 0;
-	while(numbers[j])
+	while (numbers[j])
 	{
 		num_int_flag = 1;
 		all_zero_flag = 0;

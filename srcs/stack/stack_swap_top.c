@@ -1,10 +1,10 @@
 #include "push_swap.h"
 
-void    stack_swap_top(t_stack *stack)
+void	stack_swap_top(t_stack *stack)
 {
-	t_node *old_top;
-	t_node *new_top;
-	t_node *third;
+	t_node	*old_top;
+	t_node	*new_top;
+	t_node	*third;
 
 	if (!stack || stack->size < 2)
 		return ;
@@ -18,7 +18,7 @@ void    stack_swap_top(t_stack *stack)
 	third = old_top->next;
 	if (stack->size == 2)
 	{
-		old_top->next = NULL;	
+		old_top->next = NULL;
 		stack->bottom = old_top;
 	}
 	else if (stack->size > 2)

@@ -2,7 +2,7 @@
 
 void	stack_push_bottom(t_stack *stack, t_node *node)
 {
-	t_node  *old_bottom;
+	t_node	*old_bottom;
 
 	if (!stack || !node)
 		return ;

@@ -18,7 +18,7 @@ void	op_rb(t_state *state)
 
 void	op_rr(t_state *state)
 {
-	int save_print;
+	int	save_print;
 
 	if (!state)
 		return ;

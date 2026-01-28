@@ -1,9 +1,9 @@
 #include "push_swap.h"
 
-void sort_small_5(t_state *state)
+void	sort_small_5(t_state *state)
 {
-	int pos;
-	int i;
+	int	pos;
+	int	i;
 
 	i = 0;
 	while (i < 2)

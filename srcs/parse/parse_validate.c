@@ -3,7 +3,7 @@
 static int	check_digit(char num, int *count)
 {
 	if (!ft_isdigit(num))
-			return (0);
+		return (0);
 	if (num != '0')
 		(*count)++;
 	else if (*count > 0)
@@ -15,7 +15,7 @@ int	is_valid_number(const char *num, int *all_zero_flag)
 {
 	int	i;
 	int	sign;
-	int count;
+	int	count;
 
 	if (!num || !num[0] || !all_zero_flag)
 		return (0);
@@ -25,8 +25,8 @@ int	is_valid_number(const char *num, int *all_zero_flag)
 	if (num[0] == '+' || num[0] == '-')
 		sign++;
 	i = sign;
-	while(num[i])
-	{ 	
+	while (num[i])
+	{
 		if (!check_digit(num[i], &count))
 			return (0);
 		i++;

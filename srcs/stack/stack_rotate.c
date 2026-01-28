@@ -1,10 +1,10 @@
 #include "push_swap.h"
 
-void    stack_rotate(t_stack *stack)
+void	stack_rotate(t_stack *stack)
 {
-	t_node *old_top;
-	t_node *old_bottom;
-	t_node *new_top;
+	t_node	*old_top;
+	t_node	*old_bottom;
+	t_node	*new_top;
 
 	if (!stack || stack->size < 2)
 		return ;

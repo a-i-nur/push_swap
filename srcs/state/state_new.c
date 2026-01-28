@@ -1,8 +1,8 @@
 #include "push_swap.h"
 
-t_state state_new()
+t_state	state_new(void)
 {
-	t_state state;
+	t_state	state;
 
 	state.a = stack_new('a');
 	state.b = stack_new('b');

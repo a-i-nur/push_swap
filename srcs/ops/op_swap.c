@@ -20,7 +20,7 @@ void	op_ss(t_state *state)
 {
 	int	save_print;
 
-    if (!state)
+	if (!state)
 		return ;
 	save_print = state->print;
 	state->print = 0;
