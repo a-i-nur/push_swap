@@ -104,4 +104,4 @@ $(VIS_BUILD)/bin/visualizer:
 norm:
 	@norminette
 
-.PHONY: all bonus clean fclean re test visualizer
+.PHONY: all bonus clean fclean re tests testleaks norm visualizer
