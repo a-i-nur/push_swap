@@ -1,13 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_chunks.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aakhmeto <aakhmeto@student.42heilbronn.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/29 16:48:31 by aakhmeto          #+#    #+#             */
+/*   Updated: 2026/01/29 16:48:32 by aakhmeto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 /**
- * @brief Переносить в B все элементы, не входящие в LIS.
+ * @brief Move from stack A to stack B all nodes that are not in LIS.
  *
- * Алгоритм:
- * 1) Находим LIS по индексам (0..n-1) в порядке стека A.
- * 2) Все элементы, не входящие в LIS, отправляем в B.
- * 3) Дополнительно предсортируем B по медиане non_lis:
- *    большие индексы уводим вниз через rb.
+ * LIS means "longest increasing subsequence" of node indexes in stack order.
+ * Step by step:
+ * 1) Build LIS flags for indexes in A.
+ * 2) Iterate over all nodes in A (exactly size times).
+ * 3) If a node is in LIS, rotate A to keep it.
+ * 4) Otherwise push it to B, and maybe rotate B if its index is above pivot.
+ *
+ * pivot is the middle (median) index among non-LIS nodes.
+ *
+ * @param state Global state with stacks A and B.
+ * @return Nothing.
  */
 void	push_chunks_a_to_b(t_state *state)
 {

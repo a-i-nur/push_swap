@@ -1,9 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aakhmeto <aakhmeto@student.42heilbronn.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/29 16:48:18 by aakhmeto          #+#    #+#             */
+/*   Updated: 2026/01/29 16:48:19 by aakhmeto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 /**
- * @brief Найти позицию минимального индекса в стеке.
- * @param stack Стек для поиска.
- * @return Позиция (0 = верх) или -1 при пустом/NULL.
+ * @brief Find the position of the smallest index in a stack.
+ *
+ * Iterates from top to bottom and tracks the minimum index seen.
+ *
+ * index means the sorted position of a value (0..n-1).
+ *
+ * @param stack Stack to scan.
+ * @return Position (0 = top) or -1 if stack is empty or NULL.
  */
 int	find_min_pos(const t_stack *stack)
 {
@@ -32,9 +49,14 @@ int	find_min_pos(const t_stack *stack)
 }
 
 /**
- * @brief Найти позицию максимального индекса в стеке.
- * @param stack Стек для поиска.
- * @return Позиция (0 = верх) или -1 при пустом/NULL.
+ * @brief Find the position of the largest index in a stack.
+ *
+ * Iterates from top to bottom and tracks the maximum index seen.
+ *
+ * index means the sorted position of a value (0..n-1).
+ *
+ * @param stack Stack to scan.
+ * @return Position (0 = top) or -1 if stack is empty or NULL.
  */
 int	find_max_pos(const t_stack *stack)
 {
@@ -62,6 +84,18 @@ int	find_max_pos(const t_stack *stack)
 	return (max_pos);
 }
 
+/**
+ * @brief Rotate one stack so a given position becomes the top.
+ *
+ * If the position is in the first half, rotate forward.
+ * Otherwise rotate reverse. Each loop performs one rotation.
+ *
+ * @param state Global state.
+ * @param pos Target position (0 = top).
+ * @param size Current stack size.
+ * @param stack_n Stack name: 'a' or 'b'.
+ * @return Nothing.
+ */
 static void	rotate_pos_to_top(t_state *state, int pos, int size, char stack_n)
 {
 	if (pos <= size / 2)
@@ -88,10 +122,14 @@ static void	rotate_pos_to_top(t_state *state, int pos, int size, char stack_n)
 }
 
 /**
- * @brief Прокрутить стек так, чтобы элемент по позиции стал сверху.
- * @param state Состояние.
- * @param pos Позиция (0 = верх).
- * @param stack_name 'a' или 'b'.
+ * @brief Rotate a stack so the element at position becomes the top.
+ *
+ * This is a safe wrapper that checks inputs before rotating.
+ *
+ * @param state Global state.
+ * @param pos Position (0 = top).
+ * @param stack_name 'a' or 'b'.
+ * @return Nothing.
  */
 void	bring_pos_to_top(t_state *state, int pos, char stack_name)
 {
@@ -109,8 +147,12 @@ void	bring_pos_to_top(t_state *state, int pos, char stack_name)
 }
 
 /**
- * @brief Довернуть A так, чтобы минимальный индекс был сверху.
- * @param state Состояние.
+ * @brief Rotate stack A so the smallest index is on top.
+ *
+ * It finds the min position, then rotates A until it is on top.
+ *
+ * @param state Global state.
+ * @return Nothing.
  */
 void	final_rotate_min_to_top(t_state *state)
 {

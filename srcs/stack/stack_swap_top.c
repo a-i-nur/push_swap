@@ -1,5 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_swap_top.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aakhmeto <aakhmeto@student.42heilbronn.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/29 16:47:41 by aakhmeto          #+#    #+#             */
+/*   Updated: 2026/01/29 16:47:42 by aakhmeto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
+/**
+ * @brief Swap the first two nodes of a stack (in place).
+ *
+ * Iterates only through a few pointers to relink nodes.
+ *
+ * @param stack Stack to modify.
+ * @return Nothing.
+ */
 void	stack_swap_top(t_stack *stack)
 {
 	t_node	*old_top;

@@ -1,5 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   greedy_cost.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aakhmeto <aakhmeto@student.42heilbronn.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/29 16:48:53 by aakhmeto          #+#    #+#             */
+/*   Updated: 2026/01/29 16:48:54 by aakhmeto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
+/**
+ * @brief Find the position of a node by its index value.
+ *
+ * Iterates from the top until the index is found.
+ *
+ * index means the sorted position of a value (0..n-1).
+ *
+ * @param stack Stack to search.
+ * @param index Target index value.
+ * @return Position (0 = top), or -1 if not found.
+ */
 int	find_pos_by_index(const t_stack *stack, int index)
 {
 	int		pos;
@@ -17,6 +40,16 @@ int	find_pos_by_index(const t_stack *stack, int index)
 	return (-1);
 }
 
+/**
+ * @brief Choose the index in A where index x should be inserted.
+ *
+ * Iterates over A to find the smallest index greater than x.
+ * If none exists, it returns the minimum index in A.
+ *
+ * @param a Stack A.
+ * @param x Index to insert.
+ * @return Target index in A.
+ */
 int	find_target_index_in_a(const t_stack *a, int x)
 {
 	int		min_index;
@@ -40,10 +73,13 @@ int	find_target_index_in_a(const t_stack *a, int x)
 }
 
 /**
- * @brief Посчитать вращения до верха (со знаком).
- * @param size Размер стека.
- * @param pos Позиция элемента.
- * @return + для ra/rb, - для rra/rrb.
+ * @brief Compute signed rotations needed to bring a position to the top.
+ *
+ * Positive means rotate forward (ra/rb), negative means reverse (rra/rrb).
+ *
+ * @param size Stack size.
+ * @param pos Position of the element.
+ * @return Signed rotation count.
  */
 int	rotations_to_top(int size, int pos)
 {
@@ -58,7 +94,10 @@ int	rotations_to_top(int size, int pos)
 }
 
 /**
- * @brief Абсолютное значение int.
+ * @brief Get the absolute value of an int.
+ *
+ * @param x Input value.
+ * @return Absolute value.
  */
 static int	abs_i(int x)
 {
@@ -71,10 +110,13 @@ static int	abs_i(int x)
 }
 
 /**
- * @brief Общая стоимость вращений с учетом rr/rrr.
- * @param rot_a Вращения A.
- * @param rot_b Вращения B.
- * @return Количество операций.
+ * @brief Compute total cost of rotations for A and B.
+ *
+ * If both rotations are in the same direction, rr/rrr can combine them.
+ *
+ * @param rot_a Rotations for A.
+ * @param rot_b Rotations for B.
+ * @return Operation count cost.
  */
 int	total_cost(int rot_a, int rot_b)
 {

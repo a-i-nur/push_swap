@@ -1,13 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lis_compute.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aakhmeto <aakhmeto@student.42heilbronn.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/29 16:48:42 by aakhmeto          #+#    #+#             */
+/*   Updated: 2026/01/29 16:48:43 by aakhmeto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 /**
- * @brief Посчитать LIS-флаги и медиану non-LIS.
- * @param a Стек A.
- * @param size Размер.
- * @param pivot_out Выходной pivot (медиана non-LIS).
- * @return Массив flags (1 = в LIS) или NULL.
+ * @brief Fill an array with indexes that are NOT in LIS.
+ *
+ * Iterates over flags and stores positions where flags[i] == 0.
+ *
+ * @param lis LIS helper struct with flags.
+ * @param size Total size.
+ * @param non_lis Output array for non-LIS indexes.
+ * @return Nothing.
  */
-
 static void	fill_non_lis_i(t_lis *lis, int size, int *non_lis)
 {
 	int		i;
@@ -26,6 +40,16 @@ static void	fill_non_lis_i(t_lis *lis, int size, int *non_lis)
 	}
 }
 
+/**
+ * @brief Mark the best LIS path and count non-LIS elements.
+ *
+ * It finds the best end, walks back using prev links,
+ * sets flags to 1 for LIS, then counts the rest.
+ *
+ * @param lis LIS helper struct.
+ * @param size Total size.
+ * @return Nothing.
+ */
 static void	fill_lis_best(t_lis *lis, int size)
 {
 	int		i;
@@ -54,6 +78,15 @@ static void	fill_lis_best(t_lis *lis, int size)
 	}
 }
 
+/**
+ * @brief Compute LIS lengths and prev links using DP.
+ *
+ * It copies node indexes to an array, then for each i, scans all j < i.
+ *
+ * @param lis LIS helper struct.
+ * @param size Total size.
+ * @return Nothing.
+ */
 static void	fill_lis_len(t_lis *lis, int size)
 {
 	int		i;
@@ -83,6 +116,17 @@ static void	fill_lis_len(t_lis *lis, int size)
 	}
 }
 
+/**
+ * @brief Compute LIS flags and the pivot of non-LIS indexes.
+ *
+ * LIS means "longest increasing subsequence".
+ * pivot is the middle (median) index among non-LIS elements.
+ *
+ * @param a Stack A.
+ * @param size Size of stack A.
+ * @param pivot_out Output pivot (median of non-LIS, or -1 if none).
+ * @return Flags array (1 = in LIS, 0 = not), or NULL on failure.
+ */
 int	*compute_lis_flags(const t_stack *a, int size, int *pivot_out)
 {
 	t_lis	lis;

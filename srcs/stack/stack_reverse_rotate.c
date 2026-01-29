@@ -1,5 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_reverse_rotate.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aakhmeto <aakhmeto@student.42heilbronn.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/29 16:47:49 by aakhmeto          #+#    #+#             */
+/*   Updated: 2026/01/29 16:47:47 by aakhmeto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
+/**
+ * @brief Reverse rotate a stack (bottom becomes top).
+ *
+ * It relinks bottom to the top and updates pointers.
+ *
+ * @param stack Stack to modify.
+ * @return Nothing.
+ */
 void	stack_reverse_rotate(t_stack *stack)
 {
 	t_node	*old_top;

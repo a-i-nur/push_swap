@@ -1,5 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lis_init.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aakhmeto <aakhmeto@student.42heilbronn.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/29 16:48:34 by aakhmeto          #+#    #+#             */
+/*   Updated: 2026/01/29 16:48:35 by aakhmeto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
+/**
+ * @brief Free all allocated arrays in a LIS helper struct.
+ *
+ * LIS means "longest increasing subsequence".
+ *
+ * @param lis LIS helper struct.
+ * @param with_flags If 1, also free flags array.
+ * @return Nothing.
+ */
 void	lis_free(t_lis *lis, int with_flags)
 {
 	if (lis->arr_index)
@@ -15,6 +36,15 @@ void	lis_free(t_lis *lis, int with_flags)
 	}
 }
 
+/**
+ * @brief Create and initialize a LIS helper struct for stack A.
+ *
+ * It allocates arrays and sets default values for each position.
+ *
+ * @param a Stack A.
+ * @param size Size of stack A.
+ * @return Initialized t_lis, or zeroed struct on allocation failure.
+ */
 t_lis	lis_new(const t_stack *a, int size)
 {
 	t_lis	lis;

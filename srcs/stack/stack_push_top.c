@@ -1,5 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_push_top.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aakhmeto <aakhmeto@student.42heilbronn.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/29 16:47:49 by aakhmeto          #+#    #+#             */
+/*   Updated: 2026/01/29 16:47:50 by aakhmeto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
+/**
+ * @brief Push a node to the top of a stack.
+ *
+ * If the stack is empty, the node becomes both top and bottom.
+ *
+ * @param stack Stack to modify.
+ * @param node Node to push.
+ * @return Nothing.
+ */
 void	stack_push_top(t_stack *stack, t_node *node)
 {
 	t_node	*old_top;

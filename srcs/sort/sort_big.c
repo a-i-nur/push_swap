@@ -1,5 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_big.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aakhmeto <aakhmeto@student.42heilbronn.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/29 16:48:27 by aakhmeto          #+#    #+#             */
+/*   Updated: 2026/01/29 16:48:28 by aakhmeto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
+/**
+ * @brief Sort big inputs using LIS + greedy push back.
+ *
+ * Steps:
+ * 1) Push non-LIS elements from A to B.
+ * 2) Greedily push elements back from B to A.
+ * 3) Rotate A so the smallest index is on top.
+ *
+ * LIS means "longest increasing subsequence".
+ *
+ * @param state Global state.
+ * @return Nothing.
+ */
 void	sort_big(t_state *state)
 {
 	push_chunks_a_to_b(state);

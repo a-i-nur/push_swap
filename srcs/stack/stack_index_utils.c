@@ -1,5 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_index_utils.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aakhmeto <aakhmeto@student.42heilbronn.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/29 16:48:10 by aakhmeto          #+#    #+#             */
+/*   Updated: 2026/01/29 16:48:11 by aakhmeto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
+/**
+ * @brief Merge two sorted halves into a temporary array.
+ *
+ * It iterates left and right pointers and writes in sorted order.
+ *
+ * @param arr Input array with two sorted halves.
+ * @param merge_arr Output buffer.
+ * @param vars Merge window (left, middle, right).
+ * @return Nothing.
+ */
 static void	merge_sorted_halves(int *arr, int *merge_arr, t_mergevars *vars)
 {
 	int	i;
@@ -22,6 +44,13 @@ static void	merge_sorted_halves(int *arr, int *merge_arr, t_mergevars *vars)
 		merge_arr[k++] = arr[j++];
 }
 
+/**
+ * @brief Allocate buffer, merge halves, and copy back.
+ *
+ * @param arr Array to sort.
+ * @param vars Merge window (left, middle, right).
+ * @return 1 on success, 0 on allocation failure.
+ */
 static int	merge_core(int *arr, t_mergevars *vars)
 {
 	int	*merge_arr;
@@ -45,6 +74,16 @@ static int	merge_core(int *arr, t_mergevars *vars)
 	return (1);
 }
 
+/**
+ * @brief Sort an int array using merge sort.
+ *
+ * Recursively splits the range [left, right) and merges.
+ *
+ * @param arr Array to sort.
+ * @param left Left index (inclusive).
+ * @param right Right index (exclusive).
+ * @return 1 on success, 0 on allocation failure.
+ */
 int	ft_merge_sort_ints(int *arr, int left, int right)
 {
 	int			middle;
@@ -65,6 +104,16 @@ int	ft_merge_sort_ints(int *arr, int left, int right)
 	return (1);
 }
 
+/**
+ * @brief Find the first position where value could be inserted.
+ *
+ * It uses binary search on a sorted array.
+ *
+ * @param arr Sorted array.
+ * @param size Array size.
+ * @param value Value to search.
+ * @return Index where value is or should be.
+ */
 int	find_index(const int *arr, int size, int value)
 {
 	int	left;
@@ -84,6 +133,14 @@ int	find_index(const int *arr, int size, int value)
 	return (left);
 }
 
+/**
+ * @brief Check if a stack is sorted in ascending order by value.
+ *
+ * Iterates from top to bottom and checks each adjacent pair.
+ *
+ * @param a Stack A.
+ * @return 1 if sorted or empty, 0 otherwise.
+ */
 int	is_sorted_stack(const t_stack *a)
 {
 	t_node	*node;

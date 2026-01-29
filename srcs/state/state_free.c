@@ -1,5 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   state_free.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aakhmeto <aakhmeto@student.42heilbronn.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/29 16:47:35 by aakhmeto          #+#    #+#             */
+/*   Updated: 2026/01/29 16:47:36 by aakhmeto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
+/**
+ * @brief Free a linked list of nodes.
+ *
+ * Iterates from the given node pointer until NULL.
+ *
+ * @param node Pointer to the head pointer.
+ * @return Nothing.
+ */
 void	ft_stack_clear(t_node **node)
 {
 	t_node	*tmp;
@@ -15,6 +35,14 @@ void	ft_stack_clear(t_node **node)
 	*node = NULL;
 }
 
+/**
+ * @brief Free all nodes and reset state fields.
+ *
+ * It clears both stacks and zeros sizes and counters.
+ *
+ * @param state Global state.
+ * @return Nothing.
+ */
 void	state_free(t_state *state)
 {
 	if (!state)

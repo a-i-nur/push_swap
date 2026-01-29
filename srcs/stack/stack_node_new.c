@@ -1,5 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_node_new.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aakhmeto <aakhmeto@student.42heilbronn.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/29 16:48:01 by aakhmeto          #+#    #+#             */
+/*   Updated: 2026/01/29 16:48:02 by aakhmeto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
+/**
+ * @brief Allocate and initialize a new stack node.
+ *
+ * @param value Node value.
+ * @return New node or NULL on allocation failure.
+ */
 t_node	*stack_node_new(int value)
 {
 	t_node	*new_node;

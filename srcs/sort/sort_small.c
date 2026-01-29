@@ -1,11 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_small.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aakhmeto <aakhmeto@student.42heilbronn.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/29 16:48:19 by aakhmeto          #+#    #+#             */
+/*   Updated: 2026/01/29 16:48:21 by aakhmeto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
+/**
+ * @brief Sort stack A when it has exactly 2 elements.
+ *
+ * If the top index is larger than the next, swap them.
+ *
+ * @param state Global state.
+ * @return Nothing.
+ */
 void	sort_small_2(t_state *state)
 {
 	if (state->a.top->index > state->a.top->next->index)
 		op_sa(state);
 }
 
+/**
+ * @brief Sort stack A when it has exactly 3 elements.
+ *
+ * It checks the order of top, middle, bottom indexes and applies
+ * the minimal sequence of operations.
+ *
+ * @param state Global state.
+ * @return Nothing.
+ */
 void	sort_small_3(t_state *state)
 {
 	int	top_i;
@@ -35,6 +64,18 @@ void	sort_small_3(t_state *state)
 		op_rra(state);
 }
 
+/**
+ * @brief Sort stack A when it has exactly 4 elements.
+ *
+ * Steps:
+ * 1) Move the smallest index to top.
+ * 2) Push it to B.
+ * 3) Sort the remaining 3 in A.
+ * 4) Push back from B to A.
+ *
+ * @param state Global state.
+ * @return Nothing.
+ */
 void	sort_small_4(t_state *state)
 {
 	int	pos;
@@ -46,6 +87,18 @@ void	sort_small_4(t_state *state)
 	op_pa(state);
 }
 
+/**
+ * @brief Sort stack A when it has exactly 5 elements.
+ *
+ * Steps:
+ * 1) Repeat twice: move min to top and push to B.
+ * 2) Sort remaining 3 in A.
+ * 3) If needed, swap B to keep its order.
+ * 4) Push both back to A.
+ *
+ * @param state Global state.
+ * @return Nothing.
+ */
 void	sort_small_5(t_state *state)
 {
 	int	pos;
@@ -66,6 +119,14 @@ void	sort_small_5(t_state *state)
 	op_pa(state);
 }
 
+/**
+ * @brief Dispatch small sort based on stack A size.
+ *
+ * It selects a specialized routine for size 2..5.
+ *
+ * @param state Global state.
+ * @return Nothing.
+ */
 void	sort_small(t_state *state)
 {
 	int	size;

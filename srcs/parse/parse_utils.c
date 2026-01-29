@@ -1,5 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aakhmeto <aakhmeto@student.42heilbronn.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/29 16:49:00 by aakhmeto          #+#    #+#             */
+/*   Updated: 2026/01/29 16:49:01 by aakhmeto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
+/**
+ * @brief Convert string to long with int range check.
+ *
+ * Iterates over digits, building the number and checking overflow.
+ *
+ * @param num Numeric string with optional sign.
+ * @param num_int_flag Output flag: set to 0 if out of int range.
+ * @return Converted long (0 on error/overflow).
+ */
 long	ft_atol(const char *num, int *num_int_flag)
 {
 	int		i;
