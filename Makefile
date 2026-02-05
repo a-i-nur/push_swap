@@ -7,8 +7,8 @@ OBJECTS = object_files
 LIBFT = libft
 LIBFT_A = $(LIBFT)/libft.a
 IFLAGS = -I$(INCLUDES) -I$(LIBFT)
-VIS_DIR = push_swap_visualizer
-VIS_BUILD = $(VIS_DIR)/build
+#VIS_DIR = push_swap_visualizer
+#VIS_BUILD = $(VIS_DIR)/build
 
 PS_COMMON_SRCS = srcs/error/error_exit.c \
 	srcs/stack/stack_index.c \
@@ -89,15 +89,16 @@ test:
 testleaks:
 	@bash tests/run_leaks.sh
 
-visualizer: $(VIS_BUILD)/bin/visualizer
-	@cd $(VIS_BUILD) && ./bin/visualizer
+#visualizer: $(VIS_BUILD)/bin/visualizer
+#	@cd $(VIS_BUILD) && ./bin/visualizer
 
-$(VIS_BUILD)/bin/visualizer:
-	@mkdir -p $(VIS_BUILD)
-	@cmake -S $(VIS_DIR) -B $(VIS_BUILD)
-	@$(MAKE) -C $(VIS_BUILD)
+#$(VIS_BUILD)/bin/visualizer:
+#	@mkdir -p $(VIS_BUILD)
+#	@cmake -S $(VIS_DIR) -B $(VIS_BUILD)
+#	@$(MAKE) -C $(VIS_BUILD)
 
-norm:
-	@norminette
+#norm:
+#	@norminette
 
-.PHONY: all bonus clean fclean re tests testleaks norm visualizer
+.PHONY: all bonus clean fclean re test testleaks
+#tests testleaks norm visualizer

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aakhmeto <aakhmeto@student.42heilbronn.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/30 12:39:50 by aakhmeto          #+#    #+#             */
+/*   Updated: 2026/01/30 12:50:58 by aakhmeto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static int	is_op_line(const char *line, const char *op, size_t len)
@@ -11,7 +23,7 @@ static int	is_op_line(const char *line, const char *op, size_t len)
 	return (0);
 }
 
-int	apply_op_line(t_state *st, char *line)
+static int	apply_op_line(t_state *st, char *line)
 {
 	if (is_op_line(line, "sa", 2))
 		op_sa(st);
@@ -40,10 +52,19 @@ int	apply_op_line(t_state *st, char *line)
 	return (1);
 }
 
+static void	check_apply_op_line(t_state *state, char *line)
+{
+	if (!apply_op_line(state, line))
+	{
+		free(line);
+		error_exit(state);
+	}
+}
+
 int	main(int argc, char *argv[])
 {
-	t_state state;
-	char    *line;
+	t_state	state;
+	char	*line;
 
 	if (argc < 2)
 		return (0);
@@ -52,19 +73,16 @@ int	main(int argc, char *argv[])
 	parse_args(&state, argc, argv);
 	if (assign_indexes(&state.a) == 0)
 		error_exit(&state);
-	while ((line = get_next_line(0)) != NULL)
+	line = get_next_line(0);
+	while (line != NULL)
 	{
-		if (!apply_op_line(&state, line))
-		{
-			free(line);
-			error_exit(&state);
-		}
+		check_apply_op_line(&state, line);
 		free(line);
+		line = get_next_line(0);
 	}
 	if (is_sorted_stack(&state.a) && state.b.size == 0)
 		ft_printf("OK\n");
 	else
 		ft_printf("KO\n");
-	state_free(&state);
-	return (0);
+	return (state_free(&state), 0);
 }

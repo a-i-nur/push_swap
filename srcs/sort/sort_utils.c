@@ -6,7 +6,7 @@
 /*   By: aakhmeto <aakhmeto@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 16:48:18 by aakhmeto          #+#    #+#             */
-/*   Updated: 2026/01/29 16:48:19 by aakhmeto         ###   ########.fr       */
+/*   Updated: 2026/01/30 12:57:07 by aakhmeto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void	bring_pos_to_top(t_state *state, int pos, char stack_name)
 {
 	int	size;
 
+	size = 0;
 	if (!state || (stack_name != 'a' && stack_name != 'b'))
 		return ;
 	if (stack_name == 'a')
